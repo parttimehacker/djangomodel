@@ -1,5 +1,9 @@
-# djangomodel
+# djangomodel 
 The DjangoModel class is used to encapsulate several RESTful API calls to a Django web server. This class is used in my do it yourself home automation system. 
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 
 > Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
 
