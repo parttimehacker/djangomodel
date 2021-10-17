@@ -22,7 +22,7 @@ The DjangoModel class is used to encapsulate several RESTful API calls to a Djan
 
 ## General Information
 - Provide general information about your project here.
-#### This is one of six classes used in my home automation system. 
+-- This is one of six classes used in my home automation system. 
 - What problem does it (intend to) solve?
 #### I wanted to isolate the django rest_framework code into a single class.
 - What is the purpose of your project?
