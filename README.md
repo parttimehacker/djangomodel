@@ -8,7 +8,8 @@ The DjangoModel class is used to encapsulate several RESTful API calls to a Djan
 
 ![Your Repository's Stats](https://github-readme-stats.vercel.app/api/top-langs/?username=parttimehacker&theme=blue-green)
 
-![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url = https://github.com/parttimehacker)
+### HITS
+![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https://github.com/parttimehacker)
 
 > Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
 
