@@ -19,13 +19,13 @@ The DjangoModel class is used to encapsulate several RESTful API calls to a Djan
 
 ## General Information
 - Provide general information about your project here.
-This is one of six classes used in my home automation system. 
+####This is one of six classes used in my home automation system. 
 - What problem does it (intend to) solve?
-I wanted to isolate the django rest_framework code into a single class.
+####I wanted to isolate the django rest_framework code into a single class.
 - What is the purpose of your project?
-My home automation system contains environment sensors, motion sensors, LED clocks, light switches, emergency sirens, a web server, interfaces to Adafruit.io and a mosquitto MQTT broker.
+####My home automation system contains environment sensors, motion sensors, LED clocks, light switches, emergency sirens, a web server, interfaces to Adafruit.io and a mosquitto MQTT broker.
 - Why did you undertake it?
-This was a fun project to learn about python, Raspberry Pi, Arduino processors, hardware and more.
+####This was a fun project to learn about python, Raspberry Pi, Arduino processors, hardware and more.
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
 
