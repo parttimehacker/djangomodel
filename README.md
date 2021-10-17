@@ -5,6 +5,7 @@ The DjangoModel class is used to encapsulate several RESTful API calls to a Djan
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django)
 [![linux](https://svgshare.com/i/Zhy.svg)](https://svgshare.com/i/Zhy.svg)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django)
 
 > Live demo [_here_](https://www.example.com). <!-- If you have the project hosted somewhere, include the link here. -->
 
