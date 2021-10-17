@@ -61,6 +61,22 @@ Proceed to describe how to install / setup one's local environment / get started
 How does one go about using it?
 Provide various use cases and code examples here.
 
+```
+├── asset.py
+├── asset.service
+├── LICENSE
+├── logging.ini
+├── pkg_classes
+│   ├── configmodel.py
+│   ├── djangomodel.py
+│   ├── statusmodel.py
+│   ├── testmodel.py
+│   ├── topicmodel.py
+│   └── whocontroller.py
+├── README.md
+├── requirements.txt
+├── systemd_script.sh
+```
 `write-your-code-here`
 
 
