@@ -3,7 +3,7 @@
 
 # The MIT License (MIT)
 #
-# Copyright (c) 2019 parttimehacker@gmail.com
+# Copyright (c) 2021 parttimehacker@gmail.com
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -32,12 +32,12 @@ import requests
 HEADERS = {'Content-type': 'application/json'}
 
 class DjangoModel:
-    """ Command line arguement model which expects an MQTT broker hostname or IP address,
-        the location topic for the device and an option mode for the switch.
+    """ The DjangoModel class is used to encapsulate several RESTful API calls to a 
+    	Django web server. This class is used in my do it yourself home automation system.
     """
 
     def __init__(self, logging_file):
-        """ Parse the command line arguements """
+        """ Prepare for logging, urls and serve ids for REST put """
         logging.config.fileConfig(fname=logging_file, disable_existing_loggers=False)
         # Get the logger specified in the file
         self.logger = logging.getLogger(__name__)
@@ -46,14 +46,14 @@ class DjangoModel:
         self.ids = {"server": 0, "environment": 0, "motion": 0}
 
     def set_django_urls(self, webserver):
-        """ MQTT BORKER hostname or IP address."""
+        """ Create API strings based on hostname or IP address."""
         self.urls["status"] = webserver + self.urls["status"]
         self.urls["assets"] = webserver + self.urls["assets"]
         self.urls["environment"] = webserver + self.urls["environment"]
         self.urls["motion"] = webserver + self.urls["motion"]
 
     def get_server_id(self,):
-        """ MQTT BORKER hostname or IP address."""
+        """ Find the server id from the Django database."""
         try:
             response = requests.get(self.urls["status"])
             servers = response.json()
@@ -74,7 +74,7 @@ class DjangoModel:
             print(err)
 
     def get_environment_id(self,):
-        """ MQTT BORKER hostname or IP address."""
+        """ Find the location id from the Django database (environment sensors)."""
         try:
             response = requests.get(self.urls["environment"])
             locations = response.json()
@@ -96,7 +96,7 @@ class DjangoModel:
             print(err)
 
     def get_motion_id(self,):
-        """ MQTT BORKER hostname or IP address."""
+        """ Find the server id from the Django database (PIR sensors)."""
         try:
             response = requests.get(self.urls["motion"])
             locations = response.json()
@@ -117,7 +117,7 @@ class DjangoModel:
             print(err)
 
     def put_server_status(self, info):
-        """ put json cpu status to the django server """
+        """ REST put json cpu status to the Django server """
         info["id"] = self.ids["server"]
         url = self.urls["status"] + "/" + str(self.ids["server"])
         try:
@@ -134,7 +134,7 @@ class DjangoModel:
             print(err)
 
     def put_server_asset(self, info):
-        """ put json cpu status to the django server """
+        """ REST put json server asset info to the Django server """
         info["id"] = self.ids["server"]
         url = self.urls["asset"]  + "/" + str(self.ids["server"])
         try:
