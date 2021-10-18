@@ -23,47 +23,44 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-import argparse
 import logging
 import logging.config
-import requests
-import json
 import socket
+import json
+import requests
+
+HEADERS = {'Content-type': 'application/json'}
 
 class DjangoModel:
     """ Command line arguement model which expects an MQTT broker hostname or IP address,
         the location topic for the device and an option mode for the switch.
     """
 
-    def __init__(self,logging_file):
+    def __init__(self, logging_file):
         """ Parse the command line arguements """
-        logging.config.fileConfig( fname=logging_file, disable_existing_loggers=False )
+        logging.config.fileConfig(fname=logging_file, disable_existing_loggers=False)
         # Get the logger specified in the file
         self.logger = logging.getLogger(__name__)
-        self.headers = {'Content-type': 'application/json'}
+        self.urls = {"status": "/server/status", "assets": "/server/asset", \
+            "environment": "/environment", "motion": "/motion"}
+        self.ids = {"server": 0, "environment": 0, "motion": 0}
 
-    def set_urls(self, webserver):
+    def set_django_urls(self, webserver):
         """ MQTT BORKER hostname or IP address."""
-        self.server = socket.gethostname()
-        print("set_urls: " + self.server)
-        self.server_status_url = webserver + "/server/status"
-        self.server_status_detail_url = webserver + "/server/status/detail"
-        self.server_asset_url = webserver + "/server/asset"
-        self.server_asset_detail_url = webserver + "/server/asset/detail"
-        self.environment_url = webserver + "/environment"
-        self.environment_detail_url = webserver + "/environment/detail"
-        self.motion_url = webserver + "/motion"
-        self.motion_detail_url = webserver + "/motion/detail"
-                                
+        self.urls["status"] = webserver + self.urls["status"]
+        self.urls["assets"] = webserver + self.urls["assets"]
+        self.urls["environment"] = webserver + self.urls["environment"]
+        self.urls["motion"] = webserver + self.urls["motion"]
+
     def get_server_id(self,):
-        url = self.server_status_url
+        """ MQTT BORKER hostname or IP address."""
         try:
-            response = requests.get(url)
+            response = requests.get(self.urls["status"])
             servers = response.json()
+            host = socket.gethostname()
             for server in servers:
-                print("get_server_id: "+server["name"])
-                if self.server == server["name"]:
-                    self.sid = server["id"]
+                if host == server["name"]:
+                    self.ids["server"] = server["id"]
                     break
             # response.raise_for_status()
             # Code here will only run if the request is successful
@@ -75,17 +72,17 @@ class DjangoModel:
             print(errt)
         except requests.exceptions.RequestException as err:
             print(err)
-            
-            
+
     def get_environment_id(self,):
-        url = self.environment_url
+        """ MQTT BORKER hostname or IP address."""
         try:
-            response = requests.get(url)
+            response = requests.get(self.urls["environment"])
             locations = response.json()
+            host = socket.gethostname()
             for location in locations:
                 # print("get_server_id: "+server["name"])
-                if self.location == location["name"]:
-                    self.eid = location["id"]
+                if host == location["name"]:
+                    self.ids["environment"] = location["id"]
                     break
             # response.raise_for_status()
             # Code here will only run if the request is successful
@@ -99,14 +96,14 @@ class DjangoModel:
             print(err)
 
     def get_motion_id(self,):
-        url = self.motion_url
+        """ MQTT BORKER hostname or IP address."""
         try:
-            response = requests.get(url)
-            location = response.json()
+            response = requests.get(self.urls["motion"])
+            locations = response.json()
+            host = socket.gethostname()
             for location in locations:
-                # print("get_server_id: "+server["name"])
-                if self.location == location["name"]:
-                    self.mid = location["id"]
+                if host == location["name"]:
+                    self.ids["motion"] = location["id"]
                     break
             # response.raise_for_status()
             # Code here will only run if the request is successful
@@ -118,14 +115,13 @@ class DjangoModel:
             print(errt)
         except requests.exceptions.RequestException as err:
             print(err)
-            
 
     def put_server_status(self, info):
-        """ put json cpu status to the django server """  
-        info["id"] = self.id  
-        url = self.server_status_detail_url + "/" + str(self.id)
+        """ put json cpu status to the django server """
+        info["id"] = self.ids["server"]
+        url = self.urls["status"] + "/" + str(self.ids["server"])
         try:
-            response = requests.put(url, data=json.dumps(info), headers=self.headers)
+            response = requests.put(url, data=json.dumps(info), headers=HEADERS)
             response.raise_for_status()
             # Code here will only run if the request is successful
         except requests.exceptions.HTTPError as errh:
@@ -136,13 +132,13 @@ class DjangoModel:
             print(errt)
         except requests.exceptions.RequestException as err:
             print(err)
-        
+
     def put_server_asset(self, info):
-        """ put json cpu status to the django server """  
-        info["id"] = self.id  
-        url = self.server_asset_detail_url + "/" + str(self.id)
+        """ put json cpu status to the django server """
+        info["id"] = self.ids["server"]
+        url = self.urls["asset"]  + "/" + str(self.ids["server"])
         try:
-            response = requests.put(url, data=json.dumps(info), headers=self.headers)
+            response = requests.put(url, data=json.dumps(info), headers=HEADERS)
             response.raise_for_status()
             # Code here will only run if the request is successful
         except requests.exceptions.HTTPError as errh:
@@ -153,5 +149,3 @@ class DjangoModel:
             print(errt)
         except requests.exceptions.RequestException as err:
             print(err)
-
-
