@@ -32,8 +32,8 @@ import requests
 HEADERS = {'Content-type': 'application/json'}
 
 class DjangoModel:
-    """ The DjangoModel class is used to encapsulate several RESTful API calls to a 
-    	Django web server. This class is used in my do it yourself home automation system.
+    """ The DjangoModel class is used to encapsulate several RESTful API calls to a
+        Django web server. This class is used in my do it yourself home automation system.
     """
 
     def __init__(self, logging_file):
@@ -120,32 +120,37 @@ class DjangoModel:
         """ REST put json cpu status to the Django server """
         info["id"] = self.ids["server"]
         url = self.urls["status"] + "/" + str(self.ids["server"])
-        try:
-            response = requests.put(url, data=json.dumps(info), headers=HEADERS)
-            response.raise_for_status()
-            # Code here will only run if the request is successful
-        except requests.exceptions.HTTPError as errh:
-            print(errh)
-        except requests.exceptions.ConnectionError as errc:
-            print(errc)
-        except requests.exceptions.Timeout as errt:
-            print(errt)
-        except requests.exceptions.RequestException as err:
-            print(err)
+        put(url, info)
 
     def put_server_asset(self, info):
         """ REST put json server asset info to the Django server """
         info["id"] = self.ids["server"]
         url = self.urls["asset"]  + "/" + str(self.ids["server"])
-        try:
-            response = requests.put(url, data=json.dumps(info), headers=HEADERS)
-            response.raise_for_status()
-            # Code here will only run if the request is successful
-        except requests.exceptions.HTTPError as errh:
-            print(errh)
-        except requests.exceptions.ConnectionError as errc:
-            print(errc)
-        except requests.exceptions.Timeout as errt:
-            print(errt)
-        except requests.exceptions.RequestException as err:
-            print(err)
+        put(url, info)
+
+    def put_environment(self, info):
+        """ REST put json server asset info to the Django server """
+        info["id"] = self.ids["environment"]
+        url = self.urls["environment"]  + "/" + str(self.ids["environment"])
+        put(url, info)
+
+    def put_motion(self, info):
+        """ REST put json server asset info to the Django server """
+        info["id"] = self.ids["motion"]
+        url = self.urls["motion"]  + "/" + str(self.ids["motion"])
+        put(url, info)
+
+def put(url, info):
+    """ REST put json server info to the Django server """
+    try:
+        response = requests.put(url, data=json.dumps(info), headers=HEADERS)
+        response.raise_for_status()
+        # Code here will only run if the request is successful
+    except requests.exceptions.HTTPError as errh:
+        print(errh)
+    except requests.exceptions.ConnectionError as errc:
+        print(errc)
+    except requests.exceptions.Timeout as errt:
+        print(errt)
+    except requests.exceptions.RequestException as err:
+        print(err)
