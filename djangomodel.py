@@ -29,7 +29,28 @@ import socket
 import json
 import requests
 
-HEADERS = {'Content-type': 'application/json'}
+# GLOBALS
+
+HEADERS = {'Content-type': 'application/json'} # put parameters are json
+
+# General methods
+
+def put(url, info, logger):
+    """ REST put json server info to the Django server """
+    try:
+        response = requests.put(url, data=json.dumps(info), headers=HEADERS)
+        response.raise_for_status()
+        # Code here will only run if the request is successful
+    except requests.exceptions.HTTPError as errh:
+        logger.debug(errh)
+    except requests.exceptions.ConnectionError as errc:
+        logger.debug(errc)
+    except requests.exceptions.Timeout as errt:
+        logger.debug(errt)
+    except requests.exceptions.RequestException as err:
+        logger.debug(err)
+
+# Django Model Class
 
 class DjangoModel:
     """ The DjangoModel class is used to encapsulate several RESTful API calls to a
@@ -43,114 +64,54 @@ class DjangoModel:
         self.logger = logging.getLogger(__name__)
         self.urls = {"status": "/server/status", "assets": "/server/asset", \
             "environment": "/environment", "motion": "/motion"}
-        self.ids = {"server": 0, "environment": 0, "motion": 0}
+        self.ids = {"server": 0, "assets": 0, "environment": 0, "motion": 0}
 
     def set_django_urls(self, webserver):
         """ Create API strings based on hostname or IP address."""
-        self.urls["status"] = webserver + self.urls["status"]
-        self.urls["assets"] = webserver + self.urls["assets"]
-        self.urls["environment"] = webserver + self.urls["environment"]
-        self.urls["motion"] = webserver + self.urls["motion"]
+        for key, _ in self.ids:
+            self.urls[key] = webserver + self.urls[key]
+            self.get_id(key)
 
-    def get_server_id(self,):
-        """ Find the server id from the Django database."""
-        try:
-            response = requests.get(self.urls["status"])
-            servers = response.json()
-            host = socket.gethostname()
-            for server in servers:
-                if host == server["name"]:
-                    self.ids["server"] = server["id"]
-                    break
-            # response.raise_for_status()
-            # Code here will only run if the request is successful
-        except requests.exceptions.HTTPError as errh:
-            print(errh)
-        except requests.exceptions.ConnectionError as errc:
-            print(errc)
-        except requests.exceptions.Timeout as errt:
-            print(errt)
-        except requests.exceptions.RequestException as err:
-            print(err)
-
-    def get_environment_id(self,):
-        """ Find the location id from the Django database (environment sensors)."""
-        try:
-            response = requests.get(self.urls["environment"])
-            locations = response.json()
-            host = socket.gethostname()
-            for location in locations:
-                # print("get_server_id: "+server["name"])
-                if host == location["name"]:
-                    self.ids["environment"] = location["id"]
-                    break
-            # response.raise_for_status()
-            # Code here will only run if the request is successful
-        except requests.exceptions.HTTPError as errh:
-            print(errh)
-        except requests.exceptions.ConnectionError as errc:
-            print(errc)
-        except requests.exceptions.Timeout as errt:
-            print(errt)
-        except requests.exceptions.RequestException as err:
-            print(err)
-
-    def get_motion_id(self,):
+    def get_id(self, key):
         """ Find the server id from the Django database (PIR sensors)."""
         try:
-            response = requests.get(self.urls["motion"])
-            locations = response.json()
+            response = requests.get(self.urls[key])
+            info_array = response.json()
             host = socket.gethostname()
-            for location in locations:
-                if host == location["name"]:
-                    self.ids["motion"] = location["id"]
+            for info in info_array:
+                if host == info["name"]:
+                    self.ids[key] = info[key]
                     break
-            # response.raise_for_status()
             # Code here will only run if the request is successful
         except requests.exceptions.HTTPError as errh:
-            print(errh)
+            self.logger.debug(errh)
         except requests.exceptions.ConnectionError as errc:
-            print(errc)
+            self.logger.debug(errc)
         except requests.exceptions.Timeout as errt:
-            print(errt)
+            self.logger.debug(errt)
         except requests.exceptions.RequestException as err:
-            print(err)
+            self.logger.debug(err)
 
     def put_server_status(self, info):
         """ REST put json cpu status to the Django server """
         info["id"] = self.ids["server"]
         url = self.urls["status"] + "/" + str(self.ids["server"])
-        put(url, info)
+        put(url, info, self.logger)
 
     def put_server_asset(self, info):
         """ REST put json server asset info to the Django server """
         info["id"] = self.ids["server"]
         url = self.urls["asset"]  + "/" + str(self.ids["server"])
-        put(url, info)
+        put(url, info, self.logger)
 
     def put_environment(self, info):
         """ REST put json server asset info to the Django server """
         info["id"] = self.ids["environment"]
         url = self.urls["environment"]  + "/" + str(self.ids["environment"])
-        put(url, info)
+        put(url, info, self.logger)
 
     def put_motion(self, info):
         """ REST put json server asset info to the Django server """
         info["id"] = self.ids["motion"]
         url = self.urls["motion"]  + "/" + str(self.ids["motion"])
-        put(url, info)
-
-def put(url, info):
-    """ REST put json server info to the Django server """
-    try:
-        response = requests.put(url, data=json.dumps(info), headers=HEADERS)
-        response.raise_for_status()
-        # Code here will only run if the request is successful
-    except requests.exceptions.HTTPError as errh:
-        print(errh)
-    except requests.exceptions.ConnectionError as errc:
-        print(errc)
-    except requests.exceptions.Timeout as errt:
-        print(errt)
-    except requests.exceptions.RequestException as err:
-        print(err)
+        put(url, info, self.logger)
