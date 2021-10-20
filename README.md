@@ -42,7 +42,7 @@ The DjangoView class is used to encapsulate several RESTful API calls to a Djang
 ## Features
 List the ready features here:
 - Provides django server rest_framework interface via python **requests** GET, PUT, POST and DELETE functions
-- Isolates the process to update the web server from the rest of the application
+- Isolates the django process to update the web server from the rest of the application
 - Code passes pylint with a score of 10.0
 
 
