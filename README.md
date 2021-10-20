@@ -23,7 +23,7 @@ The DjangoView class is used to encapsulate several RESTful API calls to a Djang
 
 ## General Information
 - Provide general information about your project here.
-  - This is one of six classes used in my home automation system (DIYHA). I've used OOP and MVC concepts in my DIYHA system. 
+  - This is one of six classes used in my home automation system (**DIYHA**). I've used OOP and MVC concepts in my DIYHA system. 
 - What problem does it (intend to) solve?
   - I wanted to isolate the django rest_framework code into a single class. The main python application only uses PUT requests to update information.
 - What is the purpose of your project?
@@ -41,7 +41,7 @@ The DjangoView class is used to encapsulate several RESTful API calls to a Djang
 
 ## Features
 List the ready features here:
-- Provides django server rest_framework GET, PUT, POST and DELETE functions
+- Provides django server rest_framework interface via python **requests** GET, PUT, POST and DELETE functions
 - Isolates the process to update the web server from the rest of the application
 - Code passes pylint with a score of 10.0
 
