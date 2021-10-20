@@ -107,7 +107,7 @@ Give credit here.
 
 
 ## Contact
-Created by [@parttimehacker](https://www.parttimehacker.io/) - feel free to contact me!
+Created by [@parttimehacker](http://parttimehacker.io/) - feel free to contact me!
 ### Repository Stats
 ![Your Repository’s Stats](https://github-readme-stats.vercel.app/api?username=parttimehacker&show_icons=true)
 ### Repository Languages
