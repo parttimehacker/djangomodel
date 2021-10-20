@@ -81,7 +81,7 @@ Provide various use cases and code examples here.
 
 
 ## Project Status
-Project is: https://progress-bar.dev/80/?title=progress
+Project is: ![Status](https://progress-bar.dev/80/?title=progress)
 
 
 ## Room for Improvement
