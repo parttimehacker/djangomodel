@@ -1,5 +1,5 @@
 # djangoview 
-The DjangoView class is used to encapsulate several RESTful API calls to a Django web server. This class is used in my do it yourself home automation system. 
+The DjangoView class is used to encapsulate several RESTful API calls to a Django web server. This class is used in my *do it yourself home automation system*. 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django)
@@ -23,19 +23,19 @@ The DjangoView class is used to encapsulate several RESTful API calls to a Djang
 
 ## General Information
 - Provide general information about your project here.
-  - This is one of six classes used in my home automation system. 
+  - This is one of six classes used in my home automation system (DIYHA). I've used OOP and MVC concepts in my DIYHA system. 
 - What problem does it (intend to) solve?
-  - I wanted to isolate the django rest_framework code into a single class.
+  - I wanted to isolate the django rest_framework code into a single class. The main python application only uses PUT requests to update information.
 - What is the purpose of your project?
-  - My home automation system contains environment sensors, motion sensors, LED clocks, light switches, emergency sirens, a web server, interfaces to Adafruit.io and a mosquitto MQTT broker.
+  - My home automation system contains environment sensors, motion sensors, LED clocks, light switches, emergency sirens, a django web server, interfaces to Adafruit.io and a mosquitto MQTT broker.
 - Why did you undertake it?
   - This was a fun project to learn about python, Raspberry Pi, Arduino processors, hardware and more.
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
 
 ## Technologies Used
-- Tech 1 - version 1.0
-- Tech 2 - version 2.0
+- Django Web Server - version 3.2.8
+- python - version 3.7.3
 - Tech 3 - version 3.0
 
 
