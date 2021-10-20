@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" DIYHA Application Configuration Initializer """
+""" DIYHA Application Django Server View  """
 
 # The MIT License (MIT)
 #
@@ -29,7 +29,7 @@ import socket
 import json
 import requests
 
-# GLOBALS
+# Global constant
 
 HEADERS = {'Content-type': 'application/json'} # put parameters are json
 
@@ -52,8 +52,8 @@ def put(url, info, logger):
 
 # Django Model Class
 
-class DjangoModel:
-    """ The DjangoModel class is used to encapsulate several RESTful API calls to a
+class DjangoView:
+    """ The DjangoView class is used to encapsulate several RESTful API calls to a
         Django web server. This class is used in my do it yourself home automation system.
     """
 
@@ -62,9 +62,10 @@ class DjangoModel:
         logging.config.fileConfig(fname=logging_file, disable_existing_loggers=False)
         # Get the logger specified in the file
         self.logger = logging.getLogger(__name__)
-        self.urls = {"status": "/server/status", "assets": "/server/asset", \
-            "environment": "/environment", "motion": "/motion"}
-        self.ids = {"server": 0, "assets": 0, "environment": 0, "motion": 0}
+        self.urls = {"status": "/server/status", "asset": "/server/asset", \
+            "environment": "/environment", "motion": "/motion", "control": "/control"}
+        self.ids = {"server": 0, "assets": 0, "environment": 0, "motion": 0, \
+            "control": 0}
 
     def set_django_urls(self, webserver):
         """ Create API strings based on hostname or IP address."""
@@ -100,18 +101,24 @@ class DjangoModel:
 
     def put_server_asset(self, info):
         """ REST put json server asset info to the Django server """
-        info["id"] = self.ids["server"]
+        info["id"] = self.ids["asset"]
         url = self.urls["asset"]  + "/" + str(self.ids["server"])
         put(url, info, self.logger)
 
     def put_environment(self, info):
-        """ REST put json server asset info to the Django server """
+        """ REST put json location environment info to the Django server """
         info["id"] = self.ids["environment"]
         url = self.urls["environment"]  + "/" + str(self.ids["environment"])
         put(url, info, self.logger)
 
     def put_motion(self, info):
-        """ REST put json server asset info to the Django server """
+        """ REST put json location motion info to the Django server """
         info["id"] = self.ids["motion"]
         url = self.urls["motion"]  + "/" + str(self.ids["motion"])
+        put(url, info, self.logger)
+
+    def put_control(self, info):
+        """ REST put json diyha system control info to the Django server """
+        info["id"] = self.ids["control"]
+        url = self.urls["control"]  + "/" + str(self.ids["control"])
         put(url, info, self.logger)
