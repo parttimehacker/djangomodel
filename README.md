@@ -80,8 +80,8 @@ Provide various use cases and code examples here.
 `write-your-code-here`
 
 
-## Project Status
-Project is: ![Status](https://progress-bar.dev/80/?title=progress)
+## Implementation Status
+![Status](https://progress-bar.dev/80/?title=progress)
 
 
 ## Room for Improvement
