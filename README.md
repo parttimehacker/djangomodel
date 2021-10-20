@@ -81,7 +81,7 @@ Provide various use cases and code examples here.
 
 
 ## Project Status
-Project is: _in progress_. 
+Project is: https://progress-bar.dev/80/?title=progress
 
 
 ## Room for Improvement
