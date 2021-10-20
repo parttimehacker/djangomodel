@@ -1,5 +1,5 @@
 # djangoview 
-The DjangoView class is used to encapsulate several RESTful API calls to a Django web server. This class is used in my *do it yourself home automation system* (**DIYHA**). 
+The DjangoView class is used to encapsulate several RESTful API calls to a Django web server. This class is used in my *do it yourself home automation system* (**DIYHA**). Each python DIYHA application is hosted on a Raspberry Pi server. An **asset** application is used to capture CPU status and the platorm infomatin, e.g., Raspbian version and Raspberry server model and version.   
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django)
