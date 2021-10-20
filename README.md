@@ -1,8 +1,8 @@
 # djangoview 
 The DjangoView class is used to encapsulate several RESTful API calls to a Django web server. This class is used in my *do it yourself home automation system* (**DIYHA**). Each python DIYHA application is hosted on a Raspberry Pi server. An **asset** application is used to capture CPU status and the platorm infomation, e.g., Raspbian version and Raspberry server model and version. Example of other uses of this class:
-- **clock** capture movement in a room via a PIR sensor and the updates the MQTT and django servers
-- **sensor** measures and report on several room environment data and reports the data
-- **switch** use PIR movement and MQTT topics to turn on an AC power outlet. It also reports on the movement
+- **clock** app capture movement in a room via a PIR sensor and the updates the MQTT and django servers
+- **sensor** app measures and report on several room environment data and reports the data
+- **switch** app uses PIR movement and MQTT topics to turn on an AC power outlet. It also reports on the movement
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django)
