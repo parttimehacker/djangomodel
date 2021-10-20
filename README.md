@@ -81,7 +81,7 @@ Provide various use cases and code examples here.
 
 
 ## Project Status
-Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.
+Project is: _in progress_. 
 
 
 ## Room for Improvement
@@ -104,7 +104,7 @@ Give credit here.
 
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
+Created by [@parttimehacker](https://www.parttimehacker.io/) - feel free to contact me!
 ### Repository Stats
 ![Your Repository’s Stats](https://github-readme-stats.vercel.app/api?username=parttimehacker&show_icons=true)
 ### Repository Languages
