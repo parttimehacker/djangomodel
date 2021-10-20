@@ -36,14 +36,14 @@ The DjangoView class is used to encapsulate several RESTful API calls to a Djang
 ## Technologies Used
 - Django Web Server - version 3.2.8
 - python - version 3.7.3
-- Tech 3 - version 3.0
-
+- paho.mqtt.client - version TBD
+- gpiozero - version TBD
 
 ## Features
 List the ready features here:
-- Awesome feature 1
-- Awesome feature 2
-- Awesome feature 3
+- Provides django server rest_framework GET, PUT, POST and DELETE functions
+- Isolates the process to update the web server from the rest of the application
+- Code passes pylint with a score of 10.0
 
 
 ## Screenshots
@@ -68,11 +68,11 @@ Provide various use cases and code examples here.
 ├── logging.ini
 ├── pkg_classes
 │   ├── configmodel.py
-│   ├── djangomodel.py
-│   ├── statusmodel.py
-│   ├── testmodel.py
+│   ├── djangoview.py
+│   ├── statuscontroller.py
+│   ├── testview.py
 │   ├── topicmodel.py
-│   └── whocontroller.py
+│   └── whoview.py
 ├── README.md
 ├── requirements.txt
 ├── systemd_script.sh
